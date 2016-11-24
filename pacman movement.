@@ -1,0 +1,28 @@
+import pygame
+# Variables for intial position of pacman and later on movement
+st_x =540
+st_y = 540
+
+red = (255,0,0) # demo pacman image till sprite is insterted
+
+
+        if event.type == pygame.KEYDOWN: # movment code after key is pressed
+            if event.key == pygame.K_RIGHT:
+                st_x_change = 60
+                move = True
+            elif event.key == pygame.K_DOWN:
+                    st_y_change = 60
+                    move = False
+            elif event.key == pygame.K_LEFT:
+                st_x_change = -60
+                move = True
+            elif event.key == pygame.K_UP:
+                st_y_change = -60
+                move = False
+        
+    if move == True :
+        st_x += st_x_change
+    if move == False :
+        st_y += st_y_change
+
+    pygame.draw.rect(DISPLAYSURF , red , [st_x,st_y,60,60]) # pacman input on screen and actuall movement after above variable are valid
