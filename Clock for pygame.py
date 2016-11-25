@@ -1,53 +1,62 @@
-#Timer for pygame
-
+# Timer for pygame
 import pygame
-
-#Defining colours
-Black = (0,0,0)
-White = (255, 255, 255)
-
+ 
+# Defining colours 
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+ 
 pygame.init()
-
-#Set the dimensions for the window.
-size = [700,500]
+ 
+# Setting the dimensions 
+size = [700, 500]
 screen = pygame.display.set_mode(size)
-
-pygame.display.set_caption("Timer")
-
-#Loop function, until user exits game.
-Exit = False
-
-#Used to update the screen
+ 
+pygame.display.set_caption("Timer for pygame")
+ 
+# Loop until the user clicks the close button.
+done = False
+ 
+# Used to update the screen
 clock = pygame.time.Clock()
+ 
 font = pygame.font.Font(None, 25)
-
-#declaring some varibales used to update screen
+ 
 frame_count = 0
 frame_rate = 60
 start_time = 90
+ 
+# Main program loop
+while not done:
+    for event in pygame.event.get():  
+        if event.type == pygame.QUIT:  
+            done = True  
+ 
+# Set the screen background
+    screen.fill(WHITE)
+ 
+# Calculate total seconds
+    total_seconds = frame_count // frame_rate
 
-#Main loop program
+# Divide by 60 to get total minutes
+    minutes = total_seconds // 60
 
-#This will notify and close the program if the user exits the game.
-while not Exit:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            exit = True
+# Use modulus (remainder) to get seconds
+    seconds = total_seconds % 60
 
-#Sets the background screen for timer
-screen.fill(White)
-
-#Timer going up
-total_seconds = frame_count // frame_rate
-
-#Dividing by 60, so that we get total in minutes.
-minutes = total_seconds % 60
-
-#Using python's formatting to give a suitable output. 
-output_string = "Time: {0:02}:{1:02}".format(minutes, seconds)
-
-#Used to attach the screen/ blit.
-text = font.render(output_string, True, Black)
-screen.blit(text, [250, 250])
+# Use python string formatting to format in leading zeros
+    output_string = "Time: {0:02}:{1:02}".format(minutes, seconds)
+ 
+# Blit to the screen
+    text = font.render(output_string, True, BLACK)
+    screen.blit(text, [250, 250])
+ 
+    frame_count += 1
+ 
+# Limit frames per second
+    clock.tick(frame_rate)
+ 
+# Updates screen
+    pygame.display.flip()
+ 
 
 pygame.quit()
